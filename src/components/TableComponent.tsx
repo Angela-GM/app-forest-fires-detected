@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 
 function TableComponent() {
   const [records, setRecords] = useState([])
+  const [offset, setOffset] = useState(1);
   useEffect(() => {
     const fetchRecords = async () => {
       try {
         const response: AxiosResponse = await getRecordsTwoYearsAgo();
         setRecords(response.data.data);
       } catch (error) {
-        console.error("Error al obtener los cursos:", error);
+        console.error("error getting data:", error);
       }
     };
 
