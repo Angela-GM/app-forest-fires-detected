@@ -2,5 +2,7 @@ import { formatteddateTwoYearsAgo } from "@/lib/dateTwoYearsAgo";
 import axiosClient from "../apiClient";
 
 export function getRecordsTwoYearsAgo() {
-    return axiosClient.get(`?where=fecha_del_parte>=date'${formatteddateTwoYearsAgo}'`);
+    const limit = 100
+    const offset = 1000
+    return axiosClient.get(`?where=fecha_del_parte>=date'${formatteddateTwoYearsAgo}'&offset=${offset}&limit=${limit}`);
 }
