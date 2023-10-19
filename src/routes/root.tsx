@@ -1,3 +1,5 @@
+import { Link, Outlet } from "react-router-dom";
+
 export default function Root() {
     return (
       <>
@@ -29,18 +31,20 @@ export default function Root() {
           <nav className="py-4">
             <ul className="flex justify-around">
               <li>
-                <a href={`/table`}>Table</a>
+              <Link to={`table`}>Table</Link>
               </li>
               <li>
-                <a href={`/map`}>Map</a>
+              <Link to={`map`}>Map</Link>
               </li>
               <li>
-                <a href={`/search`}>Search</a>
+              <Link to={`search`}>Search</Link>
               </li>
             </ul>
           </nav>
         </div>
-        <div id="detail"></div>
+        <div id="detail">
+            <Outlet />
+        </div>
       </>
     );
   }

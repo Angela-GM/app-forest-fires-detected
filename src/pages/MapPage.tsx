@@ -1,6 +1,10 @@
+import MapComponent from "@/components/MapComponent"
+
 function MapPage() {
   return (
-    <div>Map</div>
+    <div>
+      <MapComponent />
+    </div>
   )
 }
 
