@@ -52,20 +52,20 @@ import {
     },
   ]
   
-  export const priorities = [
+  export const nivel = [
     {
-      label: "Low",
-      value: "low",
+      label: "0",
+      value: "0",
       icon: ArrowDownIcon,
     },
     {
-      label: "Medium",
-      value: "medium",
+      label: "1",
+      value: "1",
       icon: ArrowRightIcon,
     },
     {
-      label: "High",
-      value: "high",
+      label: "2",
+      value: "2",
       icon: ArrowUpIcon,
     },
   ]

@@ -1,33 +1,35 @@
 import { getRecordsTwoYearsAgo } from "@/services/lib/records";
-import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { DataTable } from "./table/data-table";
 import { columns } from "./table/columns";
-import * as tasks from "../components/data/tasks.json"
-
+import { Reports } from "@/interfaces/reports";
+// import * as tasks from "../components/data/tasks.json"
 
 function TableComponent() {
-  const [records, setRecords] = useState([])
+  const [records, setRecords] = useState<Reports[] | null>(null);
   // const [offset, setOffset] = useState(1);
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const response: AxiosResponse = await getRecordsTwoYearsAgo();
-        setRecords(response.data.data);
+        const response: Reports[] = await getRecordsTwoYearsAgo();
+        setRecords(response);
       } catch (error) {
         console.error("error getting data:", error);
       }
     };
 
     fetchRecords();
-  }, [records]);
-
+  }, []);
 
   return (
     <div>
-      <DataTable data={tasks} columns={columns} />
+      {records !== null ? ( // Verifica si 'records' no es null
+        <DataTable data={records} columns={columns} />
+      ) : (
+        <p>Cargando datos...</p>
+      )}
     </div>
-  )
+  );
 }
 
-export default TableComponent
+export default TableComponent;
