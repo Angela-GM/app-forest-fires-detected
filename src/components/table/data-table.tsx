@@ -65,14 +65,46 @@ export function DataTable<TData, TValue>({
   return (
     
     <div className="space-y-4">
+      <div className="flex gap-1">
+
       {/* Filtros */}
       <Input
-          placeholder={`Filtrar por... provincia`}
+          placeholder={`Provincia`}
           value={(table.getColumn('provincia')?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn('provincia')?.setFilterValue(event.target.value)
           }
         />
+         <Input
+          placeholder={`Causa Probable`}
+          value={(table.getColumn('causa_probable')?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn('causa_probable')?.setFilterValue(event.target.value)
+          }
+        />
+          <Input
+          placeholder={`Situacion actual`}
+          value={(table.getColumn('situacion_actual')?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn('situacion_actual')?.setFilterValue(event.target.value)
+          }
+        />
+         <Input
+          placeholder={`Nivel`}
+          value={(table.getColumn('nivel')?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn('nivel')?.setFilterValue(event.target.value)
+          }
+          />
+         <Input
+          placeholder={`Nivel máximo alcanzado`}
+          value={(table.getColumn('nivel_maximo_alcanzado')?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn('nivel_maximo_alcanzado')?.setFilterValue(event.target.value)
+          }
+          />
+          </div>
+        
 
       <div className="rounded-md border">
         
