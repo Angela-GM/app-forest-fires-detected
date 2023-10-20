@@ -49,7 +49,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("provincia")}</div>
+      <div>{row.getValue("provincia")}</div>
     ),
   },
   {
@@ -96,7 +96,7 @@ export const columns: ColumnDef<Reports>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("nivel")}</div>,
+    cell: ({ row }) => <div>{row.getValue("nivel")}</div>,
   },
   {
     accessorKey: "fecha_inicio",

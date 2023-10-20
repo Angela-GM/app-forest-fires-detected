@@ -20,8 +20,8 @@ import {
 // import { DataTablePagination } from "../components/data-table-pagination"
 // import { DataTableToolbar } from "../components/data-table-toolbar"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table"
-import { DataTableToolbar } from "./data-table-toolbar"
 import { DataTablePagination } from "./data-table-pagination"
+import { Input } from "../ui/input"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -63,9 +63,19 @@ export function DataTable<TData, TValue>({
   })
 
   return (
+    
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      {/* Filtros */}
+      <Input
+          placeholder={`Filtrar por... provincia`}
+          value={(table.getColumn('provincia')?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn('provincia')?.setFilterValue(event.target.value)
+          }
+        />
+
       <div className="rounded-md border">
+        
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
