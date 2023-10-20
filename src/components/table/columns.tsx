@@ -33,7 +33,7 @@ export const columns: ColumnDef<Reports>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Hora parte
-          <CaretSortIcon className="h-4 w-4" />
+          <CaretSortIcon className="ml-2 h-4 w-4" />
         </Button>
       );
     },
@@ -49,11 +49,11 @@ export const columns: ColumnDef<Reports>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Provincia <CaretSortIcon className="ml-2 h-4 w-4" />
+          Provincia <CaretSortIcon className="text-center ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("provincia")}</div>,
+    cell: ({ row }) => <div className="text-center">{row.getValue("provincia")}</div>,
   },
   {
     accessorKey: "causa_probable",
@@ -68,7 +68,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("causa_probable")}</div>
+      <div className="text-center">{row.getValue("causa_probable")}</div>
     ),
   },
   {
@@ -84,7 +84,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("termino_municipal")}</div>
+      <div className="text-center">{row.getValue("termino_municipal")}</div>
     ),
   },
   {
@@ -99,7 +99,7 @@ export const columns: ColumnDef<Reports>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("nivel")}</div>,
+    cell: ({ row }) => <div className="text-center">{row.getValue("nivel")}</div>,
   },
   {
     accessorKey: "fecha_inicio",
@@ -114,7 +114,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("fecha_inicio")}</div>
+      <div className="text-center">{row.getValue("fecha_inicio")}</div>
     ),
   },
   {
@@ -130,7 +130,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("hora_ini")}</div>
+      <div className="text-center">{row.getValue("hora_ini")}</div>
     ),
   },
   {
@@ -162,7 +162,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("situacion_actual")}</div>
+      <div className="text-center">{row.getValue("situacion_actual")}</div>
     ),
   },
   {
@@ -179,7 +179,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">
+      <div className="text-center">
         {row.getValue("tipo_y_has_de_superficie_afectada")}
       </div>
     ),
@@ -197,7 +197,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("fecha_extinguido")}</div>
+      <div className="text-center">{row.getValue("fecha_extinguido")}</div>
     ),
   },
   {
@@ -213,7 +213,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("hora_extinguido")}</div>
+      <div className="text-center">{row.getValue("hora_extinguido")}</div>
     ),
   },
   {
@@ -229,7 +229,7 @@ export const columns: ColumnDef<Reports>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("nivel_maximo_alcanzado")}</div>
+      <div className="text-center">{row.getValue("nivel_maximo_alcanzado")}</div>
     ),
   },
   {
