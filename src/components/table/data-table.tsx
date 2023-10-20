@@ -108,13 +108,13 @@ export function DataTable<TData, TValue>({
 
       <div className="rounded-md border">
         
-        <Table>
-          <TableHeader>
+        <Table className="text-s">
+          <TableHeader className="text-s" >
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow className="text-s" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.index}>
+                    <TableHead  key={header.index}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -127,7 +127,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="text-xs">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
