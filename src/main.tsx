@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/table",
+        path: "/",
         element: <TablePage />
       },
       {

@@ -85,7 +85,6 @@ export function DataTable<TData, TValue>({
   });
 
   const resetSelectValues = () => {
-    console.log("reset");
     const resetValues = { ...initialSelectValues };
     table.getColumn("provincia")?.setFilterValue(resetValues.provincia);
     table
