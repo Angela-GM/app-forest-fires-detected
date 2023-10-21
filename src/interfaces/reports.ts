@@ -1,5 +1,5 @@
 export interface Reports {
-  causa_probable?: string | null;
+  causa_probable?: string;
   codigo_municipio_ine?: string | null;
   fecha_del_parte?: string | null;
   fecha_extinguido?: string | null;
@@ -8,11 +8,11 @@ export interface Reports {
   hora_extinguido?: string | null;
   hora_ini?: string | null;
   medios_de_extincion?: string | null;
-  nivel?: string | null;
-  nivel_maximo_alcanzado?: string | null;
+  nivel?: string;
+  nivel_maximo_alcanzado?: string;
   posicion?: { lon: number; lat: number } | null;
-  provincia?: [string] | null;
-  situacion_actual?: string | null;
+  provincia?: string;
+  situacion_actual?: string;
   termino_municipal?: string | null;
   tipo_y_has_de_superficie_afectada?: string | null;
 }
