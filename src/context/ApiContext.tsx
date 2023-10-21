@@ -1,5 +1,5 @@
 import { Reports } from "@/interfaces/reports";
-import { getAllRecords, getRecordsTwoYearsAgo } from "@/services/lib/records";
+import { getAllRecords } from "@/services/lib/records";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface ApiContextType {
