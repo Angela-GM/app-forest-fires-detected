@@ -1,5 +1,5 @@
 import { Reports } from "@/interfaces/reports";
-import { getRecordsTwoYearsAgo } from "@/services/lib/records";
+import { getAllRecords, getRecordsTwoYearsAgo } from "@/services/lib/records";
 import { createContext, useContext, useEffect, useState } from "react";
 
 interface ApiContextType {
@@ -28,7 +28,7 @@ export function ApiProvider({ children }: ApiProviderProps) {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const response: Reports[] = await getRecordsTwoYearsAgo();
+        const response: Reports[] = await getAllRecords();
         setApiData(response);
       } catch (error) {
         console.error("error getting data:", error);

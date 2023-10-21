@@ -24,9 +24,10 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { DataTablePagination } from "./data-table-pagination";
+// import { DataTablePagination } from "./data-table-pagination";
 import { useApi } from "@/context/ApiContext";
 import unidecode from "unidecode";
+import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
