@@ -28,6 +28,7 @@ import {
 import { useApi } from "@/context/ApiContext";
 import unidecode from "unidecode";
 import { DataTablePagination } from "./data-table-pagination";
+import { Button } from "../ui/button";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -51,8 +52,8 @@ export function DataTable<TData, TValue>({
     columns,
     initialState: {
       pagination: {
-        pageIndex: 0, 
-        pageSize: 50, 
+        pageIndex: 0,
+        pageSize: 50,
       },
     },
     state: {
@@ -75,10 +76,33 @@ export function DataTable<TData, TValue>({
   });
 
   const { apiData } = useApi();
+  const [initialSelectValues] = React.useState({
+    provincia: "",
+    causa_probable: "",
+    situacion_actual: "",
+    nivel: "",
+    nivel_maximo_alcanzado: "",
+  });
+
+  const resetSelectValues = () => {
+    console.log("reset");
+    const resetValues = { ...initialSelectValues };
+    table.getColumn("provincia")?.setFilterValue(resetValues.provincia);
+    table
+      .getColumn("causa_probable")
+      ?.setFilterValue(resetValues.causa_probable);
+    table
+      .getColumn("situacion_actual")
+      ?.setFilterValue(resetValues.situacion_actual);
+    table.getColumn("nivel")?.setFilterValue(resetValues.nivel);
+    table
+      .getColumn("nivel_maximo_alcanzado")
+      ?.setFilterValue(resetValues.nivel_maximo_alcanzado);
+  };
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-1">
+      <div className="flex gap-2">
         {/* Filtros */}
 
         <select
@@ -114,14 +138,14 @@ export function DataTable<TData, TValue>({
               | undefined) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("causa_probable")?.setFilterValue(event.target.value)
+            table
+              .getColumn("causa_probable")
+              ?.setFilterValue(event.target.value)
           }
         >
           <option value="">Causa probable</option>
           {[...new Set(apiData.map((option) => option.causa_probable))]
-            .filter(
-              (causa) => causa !== null && causa !== undefined
-            )
+            .filter((causa) => causa !== null && causa !== undefined)
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .sort((a: any, b: any) => unidecode(a).localeCompare(unidecode(b)))
             .map((causa, index) => (
@@ -129,8 +153,8 @@ export function DataTable<TData, TValue>({
                 {causa}
               </option>
             ))}
-        </select>   
-        
+        </select>
+
         <select
           value={
             (table.getColumn("situacion_actual")?.getFilterValue() as
@@ -139,7 +163,9 @@ export function DataTable<TData, TValue>({
               | undefined) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("situacion_actual")?.setFilterValue(event.target.value)
+            table
+              .getColumn("situacion_actual")
+              ?.setFilterValue(event.target.value)
           }
         >
           <option value="">Situación actual</option>
@@ -154,8 +180,8 @@ export function DataTable<TData, TValue>({
                 {situacion}
               </option>
             ))}
-        </select>  
-                
+        </select>
+
         <select
           value={
             (table.getColumn("nivel")?.getFilterValue() as
@@ -169,9 +195,7 @@ export function DataTable<TData, TValue>({
         >
           <option value="">Nivel</option>
           {[...new Set(apiData.map((option) => option.nivel))]
-            .filter(
-              (nivel) => nivel !== null && nivel !== undefined
-            )
+            .filter((nivel) => nivel !== null && nivel !== undefined)
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .sort((a: any, b: any) => unidecode(a).localeCompare(unidecode(b)))
             .map((nivel, index) => (
@@ -179,7 +203,7 @@ export function DataTable<TData, TValue>({
                 {nivel}
               </option>
             ))}
-        </select>      
+        </select>
 
         <select
           value={
@@ -189,14 +213,14 @@ export function DataTable<TData, TValue>({
               | undefined) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("nivel_maximo_alcanzado")?.setFilterValue(event.target.value)
+            table
+              .getColumn("nivel_maximo_alcanzado")
+              ?.setFilterValue(event.target.value)
           }
         >
           <option value="">Nivel máximo</option>
           {[...new Set(apiData.map((option) => option.nivel_maximo_alcanzado))]
-            .filter(
-              (nivelMax) => nivelMax !== null && nivelMax !== undefined
-            )
+            .filter((nivelMax) => nivelMax !== null && nivelMax !== undefined)
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .sort((a: any, b: any) => unidecode(a).localeCompare(unidecode(b)))
             .map((nivelMax, index) => (
@@ -204,8 +228,11 @@ export function DataTable<TData, TValue>({
                 {nivelMax}
               </option>
             ))}
-        </select>              
-        
+        </select>
+
+        <Button variant={"secondary"} onClick={resetSelectValues}>
+          Reset
+        </Button>
       </div>
 
       <div className="rounded-md border">
