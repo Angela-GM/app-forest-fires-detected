@@ -1,6 +1,8 @@
+import React from 'react'
+
 function SearchComponent() {
   return (
-    <div>Search component</div>
+    <div>      Map con coordenadas</div>
   )
 }
 

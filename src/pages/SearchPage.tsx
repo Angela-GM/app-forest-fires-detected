@@ -1,6 +1,11 @@
+import SearchComponent from "@/components/SearchComponent"
+
 function SearchPage() {
   return (
-    <div>SearchPage</div>
+    <div>
+<SearchComponent />
+
+    </div>
   )
 }
 
