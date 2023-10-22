@@ -73,46 +73,17 @@ function TableComponent() {
         </div>
 
         <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Button variant={"outline"} onClick={searchByCoordinates}>
-          Buscar por coordenadas
-        </Button>
-          
+          <Button variant={"outline"} onClick={searchByCoordinates}>
+            Buscar por coordenadas (10km)
+          </Button>
         </div>
         <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Button variant={"secondary"} onClick={resetCoordinates}>
-          Reset coordenadas
-        </Button>
-
+          <Button variant={"secondary"} onClick={resetCoordinates}>
+            Reset coordenadas
+          </Button>
         </div>
-
-       
       </div>
 
-      {/* <div className="flex gap-2 my-3">
-        <label>Longitud </label>
-        <input
-          type="number"
-          placeholder="Longitud (lon)"
-          value={lon}
-          onChange={handleLonChange}
-          step="0.1"
-        />
-        <label>Latitud </label>
-
-        <input
-          type="number"
-          placeholder="Latitud (lat)"
-          value={lat}
-          onChange={handleLatChange}
-          step="0.1"
-        />
-        <Button variant={"outline"} onClick={searchByCoordinates}>
-          Buscar por coordenadas
-        </Button>
-        <Button variant={"secondary"} onClick={resetCoordinates}>
-          Reset coordenadas
-        </Button>
-      </div> */}
       <DataTable
         data={
           results.length > 0 || (lon === 0 && lat === 0) ? results : apiData

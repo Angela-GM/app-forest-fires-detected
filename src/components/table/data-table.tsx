@@ -35,6 +35,14 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
 }
 
+type UserFilters = {
+  provincia: string;
+  causa_probable: string;
+  situacion_actual: string;
+  nivel: string;
+  nivel_maximo_alcanzado: string;
+};
+
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -76,45 +84,105 @@ export function DataTable<TData, TValue>({
   });
 
   const { apiData } = useApi();
-  const [initialSelectValues] = React.useState({
-    provincia: "",
-    causa_probable: "",
-    situacion_actual: "",
-    nivel: "",
-    nivel_maximo_alcanzado: "",
-  });
 
-  const resetSelectValues = () => {
-    const resetValues = { ...initialSelectValues };
-    table.getColumn("provincia")?.setFilterValue(resetValues.provincia);
-    table
-      .getColumn("causa_probable")
-      ?.setFilterValue(resetValues.causa_probable);
-    table
-      .getColumn("situacion_actual")
-      ?.setFilterValue(resetValues.situacion_actual);
-    table.getColumn("nivel")?.setFilterValue(resetValues.nivel);
-    table
-      .getColumn("nivel_maximo_alcanzado")
-      ?.setFilterValue(resetValues.nivel_maximo_alcanzado);
+  const loadUserFilters = () => {
+    try {
+      const userFilters = localStorage.getItem("userFilters");
+      if (userFilters) {
+        return JSON.parse(userFilters);
+      }
+    } catch (error) {
+      console.error("Error al cargar los filtros del usuario:", error);
+    }
+    return null;
   };
 
- 
+  const saveUserFilters = (filters: UserFilters) => {
+    try {
+      const userFilters = JSON.stringify(filters);
+      localStorage.setItem("userFilters", userFilters);
+    } catch (error) {
+      console.error("Error al guardar los filtros del usuario:", error);
+    }
+  };
+
+  const storedFilters = loadUserFilters();
+  const [initialSelectValues, setInitialSelectValues] =
+    React.useState<UserFilters>(
+      storedFilters || {
+        provincia: "",
+        causa_probable: "",
+        situacion_actual: "",
+        nivel: "",
+        nivel_maximo_alcanzado: "",
+      }
+    );
+
+  const resetSelectValues = () => {
+    // Restablecer los valores en la tabla
+    table.getColumn("provincia")?.setFilterValue("");
+    table.getColumn("causa_probable")?.setFilterValue("");
+    table.getColumn("situacion_actual")?.setFilterValue("");
+    table.getColumn("nivel")?.setFilterValue("");
+    table.getColumn("nivel_maximo_alcanzado")?.setFilterValue("");
+
+    // Actualizar initialSelectValues con los valores reseteados
+    const updatedFilters = {
+      provincia: "",
+      causa_probable: "",
+      situacion_actual: "",
+      nivel: "",
+      nivel_maximo_alcanzado: "",
+    };
+    setInitialSelectValues(updatedFilters);
+
+    // Guardar los valores reseteados en el localStorage
+    saveUserFilters(updatedFilters);
+  };
+
+  React.useEffect(() => {
+    const storedFilters = loadUserFilters();
+    if (storedFilters) {
+      // Restaurar los valores de los filtros en la tabla
+      table.getColumn("provincia")?.setFilterValue(storedFilters.provincia);
+      table
+        .getColumn("causa_probable")
+        ?.setFilterValue(storedFilters.causa_probable);
+      table
+        .getColumn("situacion_actual")
+        ?.setFilterValue(storedFilters.situacion_actual);
+      table.getColumn("nivel")?.setFilterValue(storedFilters.nivel);
+      table
+        .getColumn("nivel_maximo_alcanzado")
+        ?.setFilterValue(storedFilters.nivel_maximo_alcanzado);
+    }
+  }, [table]); // Esto se ejecutará una vez al cargar el componente
+
   return (
-    <div className="space-y-4">
-      
-      <div className="flex gap-2">
-        {/* Filtros */}       
+    <div className="space-y-4 justify-between flex flex-col  ">
+      <div className="flex gap-2 items-center justify-between my-2 w-screen sm:max-w-sm ">
+        {/* Filtros */}
         <select
+          className="max-w-xs items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground"
           value={
             (table.getColumn("provincia")?.getFilterValue() as
               | string
               | null
               | undefined) ?? ""
           }
-          onChange={(event) =>
-            table.getColumn("provincia")?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => {
+            const selectedValue = event.target.value;
+            // Guardar el valor seleccionado
+            const updatedFilters = {
+              ...initialSelectValues,
+              provincia: selectedValue,
+            };
+            setInitialSelectValues(updatedFilters);
+            // Guardar en el localStorage
+            saveUserFilters(updatedFilters);
+            // Aplicar el filtro
+            table.getColumn("provincia")?.setFilterValue(selectedValue);
+          }}
         >
           <option value="">Provincia</option>
           {[...new Set(apiData.map((option) => option.provincia))]
@@ -131,17 +199,26 @@ export function DataTable<TData, TValue>({
         </select>
 
         <select
+          className="max-w-xs items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground"
           value={
             (table.getColumn("causa_probable")?.getFilterValue() as
               | string
               | null
               | undefined) ?? ""
           }
-          onChange={(event) =>
-            table
-              .getColumn("causa_probable")
-              ?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => {
+            const selectedValue = event.target.value;
+            // Guardar el valor seleccionado
+            const updatedFilters = {
+              ...initialSelectValues,
+              causa_probable: selectedValue,
+            };
+            setInitialSelectValues(updatedFilters);
+            // Guardar en el localStorage
+            saveUserFilters(updatedFilters);
+            // Aplicar el filtro
+            table.getColumn("causa_probable")?.setFilterValue(selectedValue);
+          }}
         >
           <option value="">Causa probable</option>
           {[...new Set(apiData.map((option) => option.causa_probable))]
@@ -156,17 +233,26 @@ export function DataTable<TData, TValue>({
         </select>
 
         <select
+          className="max-w-xs items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground"
           value={
             (table.getColumn("situacion_actual")?.getFilterValue() as
               | string
               | null
               | undefined) ?? ""
           }
-          onChange={(event) =>
-            table
-              .getColumn("situacion_actual")
-              ?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => {
+            const selectedValue = event.target.value;
+            // Guardar el valor seleccionado
+            const updatedFilters = {
+              ...initialSelectValues,
+              situacion_actual: selectedValue,
+            };
+            setInitialSelectValues(updatedFilters);
+            // Guardar en el localStorage
+            saveUserFilters(updatedFilters);
+            // Aplicar el filtro
+            table.getColumn("situacion_actual")?.setFilterValue(selectedValue);
+          }}
         >
           <option value="">Situación actual</option>
           {[...new Set(apiData.map((option) => option.situacion_actual))]
@@ -183,15 +269,26 @@ export function DataTable<TData, TValue>({
         </select>
 
         <select
+          className="max-w-xs items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground"
           value={
             (table.getColumn("nivel")?.getFilterValue() as
               | string
               | null
               | undefined) ?? ""
           }
-          onChange={(event) =>
-            table.getColumn("nivel")?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => {
+            const selectedValue = event.target.value;
+            // Guardar el valor seleccionado
+            const updatedFilters = {
+              ...initialSelectValues,
+              nivel: selectedValue,
+            };
+            setInitialSelectValues(updatedFilters);
+            // Guardar en el localStorage
+            saveUserFilters(updatedFilters);
+            // Aplicar el filtro
+            table.getColumn("nivel")?.setFilterValue(selectedValue);
+          }}
         >
           <option value="">Nivel</option>
           {[...new Set(apiData.map((option) => option.nivel))]
@@ -206,17 +303,28 @@ export function DataTable<TData, TValue>({
         </select>
 
         <select
+          className="max-w-xs items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground"
           value={
             (table.getColumn("nivel_maximo_alcanzado")?.getFilterValue() as
               | string
               | null
               | undefined) ?? ""
           }
-          onChange={(event) =>
+          onChange={(event) => {
+            const selectedValue = event.target.value;
+            // Guardar el valor seleccionado
+            const updatedFilters = {
+              ...initialSelectValues,
+              nivel_maximo_alcanzado: selectedValue,
+            };
+            setInitialSelectValues(updatedFilters);
+            // Guardar en el localStorage
+            saveUserFilters(updatedFilters);
+            // Aplicar el filtro
             table
               .getColumn("nivel_maximo_alcanzado")
-              ?.setFilterValue(event.target.value)
-          }
+              ?.setFilterValue(selectedValue);
+          }}
         >
           <option value="">Nivel máximo</option>
           {[...new Set(apiData.map((option) => option.nivel_maximo_alcanzado))]

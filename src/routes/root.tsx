@@ -13,7 +13,7 @@ export default function Root() {
         <nav className="py-4">
           <ul className="flex justify-around text-lg w-2/3 mx-auto">
             <li>
-              <Link to={`/`} className="text-white hover:text-red-200 transition duration-300">Tabla</Link>
+              <Link to={`/`} className="text-white hover:text-red-200 transition duration-300" >Tabla</Link>
             </li>
             <li>
               <Link to={`map`} className="text-white hover:text-red-200 transition duration-300">Mapa</Link>
