@@ -1,9 +1,12 @@
 import { Reports } from "@/interfaces/reports";
-import { getAllRecords } from "@/services/lib/records";
+import { getAllRecords, searchRecordsByLocation } from "@/services/lib/records";
 import { createContext, useContext, useEffect, useState } from "react";
+
 
 interface ApiContextType {
   apiData: Reports[];
+  searchByLocation: (lon: number, lat: number) => Promise<Reports[]>;
+
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -25,6 +28,7 @@ interface ApiProviderProps {
 export function ApiProvider({ children }: ApiProviderProps) {
   const [apiData, setApiData] = useState<Reports[]>([]);
 
+
   useEffect(() => {
     const fetchRecords = async () => {
       try {
@@ -38,8 +42,20 @@ export function ApiProvider({ children }: ApiProviderProps) {
     fetchRecords();
   }, []);
 
+const searchByLocation = async (lon: number, lat: number) => {
+    try {
+      const response: Reports[] = await searchRecordsByLocation(lon, lat);
+      return response;
+    } catch (error) {
+      console.error("error searching by location:", error);
+      return [];
+    }
+  };
+
+  
+
   return (
-    <ApiContext.Provider value={{ apiData}}>
+    <ApiContext.Provider value={{ apiData, searchByLocation}}>
         {children}
     </ApiContext.Provider>
   )

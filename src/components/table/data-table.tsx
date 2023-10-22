@@ -99,11 +99,12 @@ export function DataTable<TData, TValue>({
       ?.setFilterValue(resetValues.nivel_maximo_alcanzado);
   };
 
+ 
   return (
     <div className="space-y-4">
+      
       <div className="flex gap-2">
-        {/* Filtros */}
-
+        {/* Filtros */}       
         <select
           value={
             (table.getColumn("provincia")?.getFilterValue() as

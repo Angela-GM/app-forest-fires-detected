@@ -10,7 +10,7 @@ export interface Reports {
   medios_de_extincion?: string | null;
   nivel?: string;
   nivel_maximo_alcanzado?: string;
-  posicion?: { lon: number; lat: number } | null;
+  posicion?: { lon: number; lat: number };
   provincia?: string;
   situacion_actual?: string;
   termino_municipal?: string | null;
