@@ -71,7 +71,7 @@ export async function searchRecordsByLocation(lon: number, lat: number) {
   // eslint-disable-next-line no-constant-condition
   while (true) {
     const response = await axiosClient.get(
-      `?where=distance(posicion%2C%20geom%27POINT(${lon}%20${lat})%27%2C%2010km)%20AND%20fecha_del_parte%20%3E%3D%20date%272019-10-22%27%20&limit=100&offset=0`
+      `?where=distance(posicion%2C%20geom%27POINT(${lon}%20${lat})%27%2C%2010km)%20AND%20fecha_del_parte%20%3E%3D%20date%272019-10-22%27%20&limit=100&offset=0&fecha_del_parte>=date'${formatteddateTwoYearsAgo}'`
     );
 
     const responseData: Reports[] = response.data.results.map(

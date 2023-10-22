@@ -250,6 +250,9 @@ export const columns: ColumnDef<Reports>[] = [
         lon: number;
       };
 
+      
+      
+
       if (
         coordenadas &&
         typeof coordenadas === "object" &&

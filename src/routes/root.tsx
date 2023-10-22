@@ -18,9 +18,7 @@ export default function Root() {
             <li>
               <Link to={`map`} className="text-white hover:text-red-200 transition duration-300">Mapa</Link>
             </li>
-            <li>
-              <Link to={`search`} className="text-white hover:text-red-200 transition duration-300">Búsqueda</Link>
-            </li>
+            
           </ul>
         </nav>
       </div>

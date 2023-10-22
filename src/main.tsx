@@ -6,7 +6,6 @@ import App from './App';
 import ErrorPage from './error-page';
 import TablePage from './pages/TablePage';
 import MapPage from './pages/MapPage';
-import SearchPage from './pages/SearchPage';
 
 const router = createBrowserRouter([
   {
@@ -21,10 +20,6 @@ const router = createBrowserRouter([
       {
         path: "/map",
         element: <MapPage />
-      },
-      {
-        path: "/search",
-        element: <SearchPage />
       }
 
     ]

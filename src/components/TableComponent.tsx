@@ -4,37 +4,30 @@ import { useApi } from "@/context/ApiContext";
 import { useEffect, useState } from "react";
 import { Reports } from "@/interfaces/reports";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 function TableComponent() {
   const { apiData, searchByLocation } = useApi();
   const [results, setResults] = useState<Reports[]>([]);
   const [lon, setLon] = useState(0);
   const [lat, setLat] = useState(0);
-  // const [search, setSearch] = useState(false);
 
   useEffect(() => {
-    // Actualiza los resultados cuando apiData cambia
     setResults(apiData);
   }, [apiData]);
-
-
-
-
-
 
   const handleLonChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const lonValue = parseFloat(e.target.value);
     if (!isNaN(lonValue)) {
       setLon(lonValue);
-      
     }
   };
-  
+
   const handleLatChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const latValue = parseFloat(e.target.value);
     if (!isNaN(latValue)) {
       setLat(latValue);
-      
     }
   };
 
@@ -42,10 +35,9 @@ function TableComponent() {
     try {
       const data = await searchByLocation(lon, lat);
       setResults(data);
-      
     } catch (error) {
       console.error("Error searching by coordinates:", error);
-    } 
+    }
   };
 
   const resetCoordinates = () => {
@@ -53,13 +45,51 @@ function TableComponent() {
     setLat(0);
     setResults(apiData);
     console.log(apiData);
-    
-    
-  }
-  
+  };
+
   return (
     <div>
-      <div className="flex gap-2 my-3">
+      <div className="flex gap-2 items-end">
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="longitud">Longitud</Label>
+          <Input
+            type="number"
+            placeholder="Longitud (lon)"
+            value={lon}
+            onChange={handleLonChange}
+            step="0.1"
+          />
+        </div>
+
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="latitud">Latitud</Label>
+          <Input
+            type="number"
+            placeholder="Latitud (lat)"
+            value={lat}
+            onChange={handleLatChange}
+            step="0.1"
+          />
+        </div>
+
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Button variant={"outline"} onClick={searchByCoordinates}>
+          Buscar por coordenadas
+        </Button>
+          
+        </div>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+        <Button variant={"secondary"} onClick={resetCoordinates}>
+          Reset coordenadas
+        </Button>
+
+        </div>
+
+       
+      </div>
+
+      {/* <div className="flex gap-2 my-3">
+        <label>Longitud </label>
         <input
           type="number"
           placeholder="Longitud (lon)"
@@ -67,6 +97,8 @@ function TableComponent() {
           onChange={handleLonChange}
           step="0.1"
         />
+        <label>Latitud </label>
+
         <input
           type="number"
           placeholder="Latitud (lat)"
@@ -74,11 +106,19 @@ function TableComponent() {
           onChange={handleLatChange}
           step="0.1"
         />
-        <Button variant={"outline"} onClick={searchByCoordinates}>Buscar por coordenadas</Button>
-        <Button variant={"secondary"} onClick={resetCoordinates}>Reset coordenadas</Button>
-      </div>
-      <DataTable data={results.length > 0 || lon===0 && lat===0 ? results : apiData} columns={columns} />
-
+        <Button variant={"outline"} onClick={searchByCoordinates}>
+          Buscar por coordenadas
+        </Button>
+        <Button variant={"secondary"} onClick={resetCoordinates}>
+          Reset coordenadas
+        </Button>
+      </div> */}
+      <DataTable
+        data={
+          results.length > 0 || (lon === 0 && lat === 0) ? results : apiData
+        }
+        columns={columns}
+      />
     </div>
   );
 }
