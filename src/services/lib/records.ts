@@ -60,3 +60,38 @@ export async function getAllRecords() {
 
   return allRecords;
 }
+
+export async function getAllRecordsSearh() {
+  const limit = 100;
+  let offset = 0;
+  const lon = -5.57032;
+  const lat = 42.60003;
+  let allRecords: Reports[] = [];
+
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const response = await axiosClient.get(
+      `?where=fecha_del_parte>=date'${formatteddateTwoYearsAgo}'&offset=${offset}&limit=${limit}&distance(posicion%2C%20geom%27POINT(${lon}%20${lat})%27%2C%2010km)`
+    );
+
+    const responseData: Reports[] = response.data.results.map(
+      (report: Reports) => {
+        if (Array.isArray(report.provincia)) {
+          report.provincia = report.provincia.join(", ");
+        }
+        return report;
+      }
+    );
+
+    allRecords = allRecords.concat(responseData);
+
+    if (responseData.length < limit) {
+      break;
+    }
+
+    offset += limit;
+  }
+  console.log(allRecords);
+
+  return allRecords;
+}

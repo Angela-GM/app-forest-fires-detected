@@ -1,6 +1,6 @@
 function SearchComponent() {
   return (
-    <div>      Map con coordenadas</div>
+    <div></div>
   )
 }
 
