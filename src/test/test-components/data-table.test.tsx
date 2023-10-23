@@ -51,4 +51,21 @@ describe("DataTable Component", () => {
     const AllSelect = screen.getAllByRole("option");
     expect(AllSelect).toBeTruthy();
   });
+  test("has the next, previous, last page and first page buttons on rendered", () => {
+    render(
+      <ApiProvider>
+        <DataTable data={apiDataMock} columns={columns} />
+      </ApiProvider>
+    );
+
+    const prevButton = screen.getByText("Go to previous page");
+    const nextButton = screen.getByText("Go to next page");
+    const latPageButton = screen.getByText("Go to last page");
+    const firstPageButton = screen.getByText("Go to first page");
+
+    expect(prevButton).toBeTruthy();
+    expect(nextButton).toBeTruthy();
+    expect(latPageButton).toBeTruthy();
+    expect(firstPageButton).toBeTruthy();
+  });
 });
