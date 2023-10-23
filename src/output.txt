@@ -1,0 +1,54 @@
+C:\Users\eikil\Desktop\F5\prueba-tecnica-frontend-desefor\app-forest-fires-detected\src
+├── App.css
+├── App.tsx
+├── assets
+|  └── react.svg
+├── components
+|  ├── MapComponent.tsx
+|  ├── table
+|  |  ├── columns.tsx
+|  |  ├── data-table-column-header.tsx
+|  |  ├── data-table-faceted-filter.tsx
+|  |  ├── data-table-pagination.tsx
+|  |  └── data-table.tsx
+|  ├── TableComponent.tsx
+|  └── ui
+|     ├── badge.tsx
+|     ├── button.tsx
+|     ├── command.tsx
+|     ├── dropdown-menu.tsx
+|     ├── input.tsx
+|     ├── label.tsx
+|     ├── popover.tsx
+|     ├── select.tsx
+|     ├── separator.tsx
+|     └── table.tsx
+├── context
+|  └── ApiContext.tsx
+├── error-page.tsx
+├── index.css
+├── interfaces
+|  └── reports.ts
+├── lib
+|  ├── dateTwoYearsAgo.ts
+|  └── utils.ts
+├── main.tsx
+├── output.txt
+├── pages
+|  ├── MapPage.tsx
+|  └── TablePage.tsx
+├── routes
+|  └── root.tsx
+├── services
+|  ├── apiClient.ts
+|  └── lib
+|     └── records.ts
+├── test
+|  ├── test-components
+|  |  ├── data-table.test.tsx
+|  |  └── table
+|  └── vitest.setup.ts
+└── vite-env.d.ts
+
+directory: 14 file: 36
+
