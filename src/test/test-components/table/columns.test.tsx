@@ -4,7 +4,6 @@ import { ApiProvider } from "@/context/ApiContext";
 import { Reports } from "@/interfaces/reports";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import React from "react";
 
 const apiDataMock: Reports[] = [
   {

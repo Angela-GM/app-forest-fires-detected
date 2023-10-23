@@ -44,7 +44,6 @@ function TableComponent() {
     setLon(0);
     setLat(0);
     setResults(apiData);
-    console.log(apiData);
   };
 
   return (
