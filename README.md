@@ -23,18 +23,18 @@ Este proyecto es una Single Page Application (SPA) desarrollada para mostrar inf
 
 - **Trello**: Se ha utilizado Trello para la gestión del proyecto.
 
-![Alt text](../app-forest-fires-detected/public/trello.png)
+![Alt text](/public/trello.png)
 
 
 - **Vercel**: La aplicación web se ha implementado en un servidor gratuito de Vercel.
 
 ## Características de la Aplicación
 
-![página principal](../app-forest-fires-detected/public/principal.png)
+![página principal](/public/principal.png)
 
 La aplicación muestra una tabla con la mayor cantidad de datos posible que la API abierta puede proporcionar. La tabla de datos cuenta con filtros que permiten al usuario visualizar información filtrada por: Provincia, causa probable, Situación actual,Nivel y Nivel máximo alcanzado.
 
-![mapa de incendios](../app-forest-fires-detected/public/mapa.png)
+![mapa de incendios](/public/mapa.png)
 
 Además, la aplicación incluye un mapa interactivo para geoposicionar los incendios. El usuario puede almacenar la configuración de los filtros seleccionados en el almacenamiento local del navegador. La aplicación también tiene una entrada de datos para buscar incendios cercanos (en un radio de 10 km) en coordenadas GPS determinadas (latitud y longitud).
 
