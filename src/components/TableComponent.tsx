@@ -89,7 +89,7 @@ function TableComponent() {
           results.length > 0 || (lon === 0 && lat === 0) ? results : apiData
         }
         columns={columns}
-      />
+        />
     </div>
   );
 }

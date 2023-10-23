@@ -10,7 +10,7 @@ interface ApiContextType {
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-const ApiContext = createContext<ApiContextType | undefined>(undefined);
+export const ApiContext = createContext<ApiContextType | undefined>(undefined);
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function useApi() {
